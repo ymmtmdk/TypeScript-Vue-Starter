@@ -8,9 +8,14 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue, { ComponentOptions } from 'vue'
 
-export default Vue.extend({
+interface HelloComponent extends Vue {
+  initialEnthusiasm: number
+  enthusiasm : number
+}
+
+export default {
     props: ['name', 'initialEnthusiasm'],
     data() {
         return {
@@ -30,7 +35,7 @@ export default Vue.extend({
             return Array(this.enthusiasm + 1).join('!');
         }
     }
-});
+} as ComponentOptions<HelloComponent>
 </script>
 
 <style>
