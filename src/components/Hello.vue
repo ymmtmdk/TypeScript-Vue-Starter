@@ -1,4 +1,3 @@
-<!-- src/components/Hello.vue -->
 <template>
     <div>
         <div class="greeting">Hello {{name}}{{exclamationMarks}}</div>
@@ -8,34 +7,33 @@
 </template>
 
 <script lang="ts">
-import Vue, { ComponentOptions } from 'vue'
 
-interface HelloComponent extends Vue {
-  initialEnthusiasm: number
-  enthusiasm : number
-}
+import Vue from 'vue'
+import Component from 'vue-class-component'
 
-export default {
-    props: ['name', 'initialEnthusiasm'],
-    data() {
-        return {
-            enthusiasm: this.initialEnthusiasm,
-        }
-    },
-    methods: {
-        increment() { this.enthusiasm++; },
-        decrement() {
-            if (this.enthusiasm > 1) {
-                this.enthusiasm--;
-            }
-        },
-    },
-    computed: {
-        exclamationMarks(): string {
-            return Array(this.enthusiasm + 1).join('!');
+@Component({
+    props: {
+      name: String,
+      initialEnthusiasm: Number
+    }
+})
+export default class HelloComponent extends Vue {
+    initialEnthusiasm: number
+    enthusiasm = this.initialEnthusiasm
+    increment() {
+      this.enthusiasm++;
+    }
+    decrement() {
+        if (this.enthusiasm > 1) {
+            this.enthusiasm--;
         }
     }
-} as ComponentOptions<HelloComponent>
+
+    get exclamationMarks(): string {
+        return Array(this.enthusiasm + 1).join('!');
+    }
+}
+
 </script>
 
 <style>
